@@ -47,8 +47,9 @@ public class SchedulerConfig {
     DataSource quartzDataSource() {
         DataSource dataSource = DataSourceBuilder.create()
                 .driverClassName("org.postgresql.Driver")
-                .url("jdbc:postgresql://localhost:5432/webexecuter")
+                .url("jdbc:postgresql://192.168.86.42:5432/webexecuter")
                 .username("postgres")
+                .password("postgres")
                 .build();
         // schema init
         Resource initSchema = new ClassPathResource("quartz_tables_postgres.sql");
