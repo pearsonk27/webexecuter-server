@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ServerApplication {
 
 	public static void main(String[] args) {
-		log.info("Running server");
 		SpringApplication.run(ServerApplication.class, args);
 	}
 
