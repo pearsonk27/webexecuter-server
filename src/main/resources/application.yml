@@ -1,0 +1,33 @@
+org:
+  quartz:
+    dataSource:
+      quartzDataSource:
+        URL: 'jdbc:postgresql://${WEBEXECUTER_DATABASE_IP:localhost}:5432/webexecuter'
+        driver: org.postgresql.Driver
+        user: ${WEBEXECUTER_USER:postgres}
+        password: ${WEBEXECUTER_PASSWORD:postgres}
+    jdbc:
+      initialize-schema: always
+    threadPool:
+      class: org.quartz.simpl.SimpleThreadPool
+      threadCount: '2'
+      threadsInheritContextClassLoaderOfInitializingThread: true
+    jobStore:
+      class: org.quartz.impl.jdbcjobstore.JobStoreTX
+      driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+      dataSource: quartzDataSource
+spring:
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: '${org.quartz.dataSource.quartzDataSource.URL}'
+    username: '${org.quartz.dataSource.quartzDataSource.user}'
+    password: '${org.quartz.dataSource.quartzDataSource.password}'
