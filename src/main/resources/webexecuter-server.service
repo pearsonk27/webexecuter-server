@@ -1,0 +1,13 @@
+[Unit]
+Description=webexecuter server
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+ExecStart=/srv/git/webexecuter-server/src/main/resources/start.sh
+ExecReload=/srv/git/webexecuter-server/src/main/resources/restart.sh
+ExecStop=/srv/git/webexecuter-server/src/main/resources/stop.sh
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

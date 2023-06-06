@@ -1,3 +1,2 @@
 #!/bin/bash
-cd /srv/git/webexecuter-server
-./mvnw spring-boot:run
+nohup java -jar /srv/git/webexecuter-server/target/server-0.0.1-SNAPSHOT.jar
