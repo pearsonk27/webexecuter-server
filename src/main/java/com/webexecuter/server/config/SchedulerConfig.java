@@ -25,7 +25,7 @@ public class SchedulerConfig {
 
     public SchedulerConfig(ScriptJobFactory scriptJobFactory, 
                             @Value("${spring.datasource.url}") String jdbcUrl,
-                            @Value("${spring.datasource.username") String jdbcUser,
+                            @Value("${spring.datasource.username}") String jdbcUser,
                             @Value("${spring.datasource.password}") String jdbcPassword) {
         this.scriptJobFactory = scriptJobFactory;
         this.jdbcUrl = jdbcUrl;
