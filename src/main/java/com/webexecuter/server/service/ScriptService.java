@@ -1,17 +1,10 @@
 package com.webexecuter.server.service;
 
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
 import com.webexecuter.server.entity.Script;
@@ -24,10 +17,12 @@ public class ScriptService {
     private ScriptRepository scriptRepository;
 
     @Autowired
-    private SchedulerFactoryBean schedulerFactoryBean;
+    private SchedulerService schedulerService;
 
     public Script save(Script script) {
-        return scriptRepository.save(script);
+        Script returnScript = scriptRepository.save(script);
+        schedulerService.schedule(returnScript);
+        return returnScript;
     }
 
     public List<Script> findAll() {
@@ -39,6 +34,10 @@ public class ScriptService {
     }
 
     public Script findById(Long scriptId) {
-        return null;
+        Optional<Script> scriptOptional = scriptRepository.findById(scriptId);
+        if (scriptOptional.isEmpty()) {
+            throw new ObjectNotFoundException(scriptId, Script.class.getName());
+        }
+        return scriptOptional.get();
     }
 }
