@@ -10,9 +10,6 @@ on:
   push:
     branches: [master]
 
-env:
-  WEBEXECUTER_DATABASE_IP: postgres
-
 jobs:
   tests:
     name: Unit tests
